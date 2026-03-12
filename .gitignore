@@ -1,0 +1,51 @@
+# Quartus II / Prime project files (generated)
+db/
+incremental_db/
+output_files/
+simulation/
+timing/
+greybox_tmp/
+*.qws
+*.bak
+*.rpt
+*.done
+*.summary
+*.smsg
+*.pin
+*.jdi
+*.sld
+*.pof
+*.map
+*.fit
+*.asm
+*.tan
+*.sta
+*.flow
+*.jdi
+
+# Quartus programmer
+*.cdf
+
+# ModelSim / QuestaSim
+work/
+transcript
+vsim.wlf
+*.wlf
+*.vstf
+*.ucdb
+modelsim.ini
+*.cr.mti
+*.mpf
+
+# VHDL compiled
+*.cf
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor backups
+*~
+*.swp
+*.swo
