@@ -968,8 +968,7 @@ TRANSITION_LIST("ValueSelect[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 600.0;
-		LEVEL 1 FOR 400.0;
+		LEVEL 1 FOR 1000.0;
 	}
 }
 
@@ -987,8 +986,7 @@ TRANSITION_LIST("ValueSelect[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 400.0;
-		LEVEL 1 FOR 600.0;
+		LEVEL 1 FOR 1000.0;
 	}
 }
 
@@ -1032,7 +1030,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "MemWriteOut";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Hexadecimal;
 	TREE_INDEX = 3;
 	TREE_LEVEL = 0;
 }

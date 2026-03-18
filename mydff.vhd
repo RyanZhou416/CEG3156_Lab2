@@ -8,7 +8,7 @@ end entity mydff;
 
 architecture behavior of mydff is
 begin
-	process(data_in, reset)
+	process(clk, reset)
 	begin
 		if reset = '1' then
 			data_out <= '0';
