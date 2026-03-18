@@ -10,12 +10,12 @@ end entity decoder_3to8;
 
 architecture gate_logic of decoder_3to8 is
 
-    signal a    : std_logic;  -- i_sel(2)
-    signal b    : std_logic;  -- i_sel(1)
-    signal c    : std_logic;  -- i_sel(0)
-    signal na   : std_logic;  -- NOT i_sel(2)
-    signal nb   : std_logic;  -- NOT i_sel(1)
-    signal nc   : std_logic;  -- NOT i_sel(0)
+    signal a    : std_logic;
+    signal b    : std_logic;
+    signal c    : std_logic;
+    signal na   : std_logic;
+    signal nb   : std_logic;
+    signal nc   : std_logic;
 
 begin
 
@@ -27,14 +27,13 @@ begin
     nb <= not b;
     nc <= not c;
 
-    -- Each output is a minterm of the 3-bit input
-    o_out(0) <= na and nb and nc;   -- 000
-    o_out(1) <= na and nb and c;    -- 001
-    o_out(2) <= na and b  and nc;   -- 010
-    o_out(3) <= na and b  and c;    -- 011
-    o_out(4) <= a  and nb and nc;   -- 100
-    o_out(5) <= a  and nb and c;    -- 101
-    o_out(6) <= a  and b  and nc;   -- 110
-    o_out(7) <= a  and b  and c;    -- 111
+    o_out(0) <= na and nb and nc;
+    o_out(1) <= na and nb and c;
+    o_out(2) <= na and b  and nc;
+    o_out(3) <= na and b  and c;
+    o_out(4) <= a  and nb and nc;
+    o_out(5) <= a  and nb and c;
+    o_out(6) <= a  and b  and nc;
+    o_out(7) <= a  and b  and c;
 
 end architecture gate_logic;

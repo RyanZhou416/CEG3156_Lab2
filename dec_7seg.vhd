@@ -1,26 +1,3 @@
---------------------------------------------------------------------------------
--- Title         : BCD 7-segment Decoder
--- Project       : VHDL Example Programs
--------------------------------------------------------------------------------
--- File          : bcd_7seg.vhd
--- Author        : Rami Abielmona  <rabielmo@site.uottawa.ca>
--- Created       : 2004/10/17
--- Last modified : 2004/10/17
--------------------------------------------------------------------------------
--- Description : This file creates a BCD 7-segment decoder from 4-bit inputs.
---		 The code is written in structural VHDL.
--------------------------------------------------------------------------------
--- Modification history :
--- 2004.10.17 	R. Abielmona		Creation
--------------------------------------------------------------------------------
--- This file is copyright material of Rami Abielmona, Ph.D. student at the SMRLab
--- from the University of Ottawa.  Permission to make digital or hard copies of part
--- or all of this work for personal or classroom use is granted without fee
--- provided that copies are not made or distributed for profit or commercial
--- advantage and that copies bear this notice and the full citation of this work.
--- Prior permission is required to copy, republish, redistribute or post this work.
--- This notice is adapted from the ACM copyright notice.
---------------------------------------------------------------------------------
 library ieee;
 use  ieee.std_logic_1164.all;
 
@@ -73,7 +50,6 @@ BEGIN
 		END CASE;
 	END PROCESS;
 
--- LED driver is inverted
 o_segment_a <= NOT int_segment_data(6);
 o_segment_b <= NOT int_segment_data(5);
 o_segment_c <= NOT int_segment_data(4);
@@ -83,4 +59,3 @@ o_segment_f <= NOT int_segment_data(1);
 o_segment_g <= NOT int_segment_data(0);
 
 END rtl;
-

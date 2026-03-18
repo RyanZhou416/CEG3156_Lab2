@@ -1,26 +1,3 @@
---------------------------------------------------------------------------------
--- Title         : Switch Debouncer Circuit - 2nd realisation
--- Project       : VHDL Example Programs
--------------------------------------------------------------------------------
--- File          : debouncer_2.vhd
--- Author        : Rami Abielmona  <rabielmo@site.uottawa.ca>
--- Created       : 2004/10/07
--- Last modified : 2004/10/07
--------------------------------------------------------------------------------
--- Description : This file creates a debouncer circuit using a RTL approach.
---		 		 The code is written in structural VHDL.
--------------------------------------------------------------------------------
--- Modification history :
--- 2004.10.07 	R. Abielmona		Creation
--------------------------------------------------------------------------------
--- This file is copyright material of Rami Abielmona, Ph.D. student at the SMRLab
--- from the University of Ottawa.  Permission to make digital or hard copies of part
--- or all of this work for personal or classroom use is granted without fee
--- provided that copies are not made or distributed for profit or commercial
--- advantage and that copies bear this notice and the full citation of this work.
--- Prior permission is required to copy, republish, redistribute or post this work.
--- This notice is adapted from the ACM copyright notice.
---------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
@@ -63,14 +40,12 @@ second: enARdFF_2
 			  o_q => int_q2Output,
 	          o_qBar => int_notQ2Output);
 
-	-- Internal concurrent signal assignment
 	int_notD1Input <= not(int_d1Input);
 	int_d1Input <= i_raw nand int_feedback;
 	int_feedback <= int_q2Output or int_debouncedRaw;
 	int_d2Input <= int_notQ1Output and int_notQ2Output and i_raw;
 	int_debouncedRaw <= int_q2Output nor int_notQ1Output;
 
-	--  Output Concurrent Signal Assignment
 	o_clean <= int_debouncedRaw;
 
 END rtl;

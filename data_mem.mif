@@ -6,10 +6,8 @@ DATA_RADIX = HEX;
 CONTENT
 BEGIN
 
--- default values
 [00..FF] : 00000000;
 
--- initial data
 00 : 00000055;
 01 : 000000AA;
 

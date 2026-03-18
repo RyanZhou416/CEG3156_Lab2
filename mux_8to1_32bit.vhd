@@ -26,24 +26,19 @@ architecture structural of mux_8to1_32bit is
         );
     end component;
 
-    -- Level 1 outputs (4 muxes, select bit 0)
     signal l1_out_0, l1_out_1, l1_out_2, l1_out_3 : std_logic_vector(31 downto 0);
-    -- Level 2 outputs (2 muxes, select bit 1)
     signal l2_out_0, l2_out_1                      : std_logic_vector(31 downto 0);
 
 begin
 
-    -- Level 1: select between adjacent pairs using sel_line(0)
     l1_mux0: mux_2to1_32bit port map (data_in_0 => data_in_0, data_in_1 => data_in_1, sel_line => sel_line(0), data_out => l1_out_0);
     l1_mux1: mux_2to1_32bit port map (data_in_0 => data_in_2, data_in_1 => data_in_3, sel_line => sel_line(0), data_out => l1_out_1);
     l1_mux2: mux_2to1_32bit port map (data_in_0 => data_in_4, data_in_1 => data_in_5, sel_line => sel_line(0), data_out => l1_out_2);
     l1_mux3: mux_2to1_32bit port map (data_in_0 => data_in_6, data_in_1 => data_in_7, sel_line => sel_line(0), data_out => l1_out_3);
 
-    -- Level 2: select between level 1 results using sel_line(1)
     l2_mux0: mux_2to1_32bit port map (data_in_0 => l1_out_0, data_in_1 => l1_out_1, sel_line => sel_line(1), data_out => l2_out_0);
     l2_mux1: mux_2to1_32bit port map (data_in_0 => l1_out_2, data_in_1 => l1_out_3, sel_line => sel_line(1), data_out => l2_out_1);
 
-    -- Level 3: final select using sel_line(2)
     l3_mux0: mux_2to1_32bit port map (data_in_0 => l2_out_0, data_in_1 => l2_out_1, sel_line => sel_line(2), data_out => data_out);
 
 end architecture structural;

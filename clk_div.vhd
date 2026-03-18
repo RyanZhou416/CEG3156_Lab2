@@ -1,27 +1,3 @@
---------------------------------------------------------------------------------
--- Title         : Clock Divider Circuit
--- Project       : VHDL Example Programs
--------------------------------------------------------------------------------
--- File          : clk_div.vhd
--- Author        : Rami Abielmona  <rabielmo@site.uottawa.ca>
--- Created       : 2004/10/07
--- Last modified : 2004/10/07
--------------------------------------------------------------------------------
--- Description : This file creates a clock divider circuit using a behavioral approach.
---		 		 The code is extracted from "Rapid Prototyping Of Digital Systems" 
---				 by James Hamblen et Michael Furman.
--------------------------------------------------------------------------------
--- Modification history :
--- 2004.10.07 	R. Abielmona		Creation
--------------------------------------------------------------------------------
--- This file is copyright material of Rami Abielmona, Ph.D. student at the SMRLab
--- from the University of Ottawa.  Permission to make digital or hard copies of part
--- or all of this work for personal or classroom use is granted without fee
--- provided that copies are not made or distributed for profit or commercial
--- advantage and that copies bear this notice and the full citation of this work.
--- Prior permission is required to copy, republish, redistribute or post this work.
--- This notice is adapted from the ACM copyright notice.
---------------------------------------------------------------------------------
 library IEEE;
 use  IEEE.STD_LOGIC_1164.all;
 use  IEEE.STD_LOGIC_ARITH.all;
@@ -52,7 +28,6 @@ ARCHITECTURE a OF clk_div IS
 BEGIN
 	PROCESS 
 	BEGIN
--- Divide by 25
 		WAIT UNTIL clock_25Mhz'EVENT and clock_25Mhz = '1';
 			IF count_1Mhz < 24 THEN
 				count_1Mhz <= count_1Mhz + 1;
@@ -65,8 +40,6 @@ BEGIN
 				clock_1Mhz_int <= '1';
 			END IF;	
 
--- Ripple clocks are used in this code to save prescalar hardware
--- Sync all clock prescalar outputs back to master clock signal
 			clock_1Mhz <= clock_1Mhz_int;
 			clock_100Khz <= clock_100Khz_int;
 			clock_10Khz <= clock_10Khz_int;
@@ -76,7 +49,6 @@ BEGIN
 			clock_1hz <= clock_1hz_int;
 	END PROCESS;	
 
--- Divide by 10
 	PROCESS 
 	BEGIN
 		WAIT UNTIL clock_1Mhz_int'EVENT and clock_1Mhz_int = '1';
@@ -88,7 +60,6 @@ BEGIN
 			END IF;
 	END PROCESS;	
 
--- Divide by 10
 	PROCESS
 	BEGIN
 		WAIT UNTIL clock_100Khz_int'EVENT and clock_100Khz_int = '1';
@@ -100,7 +71,6 @@ BEGIN
 			END IF;
 	END PROCESS;	
 
--- Divide by 10
 	PROCESS 
 	BEGIN
 		WAIT UNTIL clock_10Khz_int'EVENT and clock_10Khz_int = '1';
@@ -112,7 +82,6 @@ BEGIN
 			END IF;
 	END PROCESS;	
 
--- Divide by 10
 	PROCESS 
 	BEGIN
 		WAIT UNTIL clock_1Khz_int'EVENT and clock_1Khz_int = '1';
@@ -124,7 +93,6 @@ BEGIN
 			END IF;
 	END PROCESS;	
 
--- Divide by 10
 	PROCESS 
 	BEGIN
 		WAIT UNTIL clock_100hz_int'EVENT and clock_100hz_int = '1';
@@ -136,7 +104,6 @@ BEGIN
 			END IF;
 	END PROCESS;	
 
--- Divide by 10
 	PROCESS
 	BEGIN
 		WAIT UNTIL clock_10hz_int'EVENT and clock_10hz_int = '1';
@@ -149,4 +116,3 @@ BEGIN
 	END PROCESS;	
 
 END a;
-
