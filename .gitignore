@@ -1,12 +1,16 @@
-# Quartus II / Prime project files (generated)
+# Quartus II / Prime generated directories
 db/
 incremental_db/
 output_files/
 simulation/
 timing/
 greybox_tmp/
+
+# Quartus project files (generated/temporary)
 *.qws
-*.bak
+*_assignment_defaults.qdf
+
+# Quartus compilation outputs
 *.rpt
 *.done
 *.summary
@@ -15,16 +19,31 @@ greybox_tmp/
 *.jdi
 *.sld
 *.pof
+*.sof
 *.map
 *.fit
 *.asm
 *.tan
 *.sta
 *.flow
-*.jdi
+*.merge.rpt
+
+# Quartus database files
+*.ddb
 
 # Quartus programmer
 *.cdf
+
+# MegaWizard generated files (replaced by behavioral VHDL)
+*.bsf
+*.cmp
+*.qip
+
+# Waveform temporaries
+*.vwf.temp
+
+# Simulation screenshots (regeneratable)
+SimResult*.png
 
 # ModelSim / QuestaSim
 work/
@@ -40,12 +59,13 @@ modelsim.ini
 # VHDL compiled
 *.cf
 
+# Backup files
+*.bak
+*~
+*.swp
+*.swo
+
 # OS files
 Thumbs.db
 Desktop.ini
 .DS_Store
-
-# Editor backups
-*~
-*.swp
-*.swo

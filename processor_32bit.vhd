@@ -6,7 +6,7 @@ entity processor_32bit is
         GClock         : in  std_logic;
         GReset         : in  std_logic;
         ValueSelect    : in  std_logic_vector(2 downto 0);
-        MuxOut         : out std_logic_vector(7 downto 0);
+        MuxOut         : out std_logic_vector(31 downto 0);
         InstructionOut : out std_logic_vector(31 downto 0);
         BranchOut      : out std_logic;
         ZeroOut        : out std_logic;
@@ -124,21 +124,18 @@ architecture structural of processor_32bit is
         );
     end component;
 
-    component output_mux is
+    component mux_8to1_32bit is
         port (
-            i_value_select : in  std_logic_vector(2 downto 0);
-            i_pc           : in  std_logic_vector(7 downto 0);
-            i_alu_result   : in  std_logic_vector(7 downto 0);
-            i_read_data1   : in  std_logic_vector(7 downto 0);
-            i_read_data2   : in  std_logic_vector(7 downto 0);
-            i_write_data   : in  std_logic_vector(7 downto 0);
-            i_reg_dst      : in  std_logic;
-            i_jump         : in  std_logic;
-            i_mem_read     : in  std_logic;
-            i_mem_to_reg   : in  std_logic;
-            i_alu_op       : in  std_logic_vector(1 downto 0);
-            i_alu_src      : in  std_logic;
-            o_mux_out      : out std_logic_vector(7 downto 0)
+            sel_line  : in  std_logic_vector(2 downto 0);
+            data_in_0 : in  std_logic_vector(31 downto 0);
+            data_in_1 : in  std_logic_vector(31 downto 0);
+            data_in_2 : in  std_logic_vector(31 downto 0);
+            data_in_3 : in  std_logic_vector(31 downto 0);
+            data_in_4 : in  std_logic_vector(31 downto 0);
+            data_in_5 : in  std_logic_vector(31 downto 0);
+            data_in_6 : in  std_logic_vector(31 downto 0);
+            data_in_7 : in  std_logic_vector(31 downto 0);
+            data_out  : out std_logic_vector(31 downto 0)
         );
     end component;
 
@@ -170,8 +167,14 @@ architecture structural of processor_32bit is
     signal zero_flag      : std_logic;
     signal mem_data_out   : std_logic_vector(31 downto 0);
     signal write_back     : std_logic_vector(31 downto 0);
+    signal pc_out_32      : std_logic_vector(31 downto 0);
+    signal ctrl_byte_32   : std_logic_vector(31 downto 0);
 
 begin
+
+    pc_out_32    <= x"000000" & pc_out;
+    ctrl_byte_32 <= x"000000" & "00" & reg_dst & jump & mem_read & mem_to_reg & alu_op(1) & alu_op(0);
+
 
     instr_mem: rom32
         port map (
@@ -279,21 +282,18 @@ begin
             data_out  => write_back
         );
 
-    obs_mux: output_mux
+    obs_mux: mux_8to1_32bit
         port map (
-            i_value_select => ValueSelect,
-            i_pc           => pc_out,
-            i_alu_result   => alu_result(7 downto 0),
-            i_read_data1   => read_data1(7 downto 0),
-            i_read_data2   => read_data2(7 downto 0),
-            i_write_data   => write_back(7 downto 0),
-            i_reg_dst      => reg_dst,
-            i_jump         => jump,
-            i_mem_read     => mem_read,
-            i_mem_to_reg   => mem_to_reg,
-            i_alu_op       => alu_op,
-            i_alu_src      => alu_src,
-            o_mux_out      => MuxOut
+            sel_line  => ValueSelect,
+            data_in_0 => pc_out_32,
+            data_in_1 => alu_result,
+            data_in_2 => read_data1,
+            data_in_3 => read_data2,
+            data_in_4 => write_back,
+            data_in_5 => ctrl_byte_32,
+            data_in_6 => (others => '0'),
+            data_in_7 => (others => '0'),
+            data_out  => MuxOut
         );
 
     InstructionOut <= instruction;
