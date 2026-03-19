@@ -167,8 +167,11 @@ architecture structural of processor_8bit is
     signal zero_flag      : std_logic;
     signal mem_data_out   : std_logic_vector(31 downto 0);
     signal write_back     : std_logic_vector(7 downto 0);
+    signal data_in_32     : std_logic_vector(31 downto 0);
 
 begin
+
+    data_in_32 <= x"000000" & read_data2;
 
     instr_mem: rom32
         port map (
@@ -259,7 +262,7 @@ begin
     data_mem: ram32
         port map (
             clock     => GClock,
-            data      => x"000000" & read_data2,
+            data      => data_in_32,
             rdaddress => alu_result,
             wraddress => alu_result,
             wren      => mem_write,
